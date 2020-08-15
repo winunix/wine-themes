@@ -1,0 +1,12 @@
+#!/bin/bash
+
+cat /etc/passwd | grep '/home/' | grep -v 'cups\|syslog\|mysql' | cut -d':' -f1 > /tmp/homes.list
+
+while read USUARIO; do
+    if [ -d /home/$USUARIO ]; then
+        ORIG="/tmp/wine-themes/"
+        DEST="/home/$USUARIO/.wine/drive_c/windows/Resources/Themes/"
+        runuser -l $USUARIO -c "mkdir -p $DEST"
+        runuser -l $USUARIO -c "rsync -a $ORIG $DEST"
+    fi
+done < /tmp/homes.list

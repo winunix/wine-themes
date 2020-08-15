@@ -1,0 +1,16 @@
+#!/bin/bash
+
+cat /etc/passwd | grep '/home/' | grep -v 'cups\|syslog\|mysql' | cut -d':' -f1 > /tmp/homes.list
+
+while read USUARIO; do
+    if [ -d /home/$USUARIO ]; then
+        THEMES="/home/$USUARIO/.wine/drive_c/windows/Resources/Themes"
+        runuser -l $USUARIO -c "rm -rf $THEMES/Neiio"
+        runuser -l $USUARIO -c "rm -rf $THEMES/Vaio"
+        runuser -l $USUARIO -c "rm -rf $THEMES/XP\ Style"
+        runuser -l $USUARIO -c "rm -rf $THEMES/Shiftie2d"
+        runuser -l $USUARIO -c "rm -rf $THEMES/Royale"
+        runuser -l $USUARIO -c "rm -rf $THEMES/Light"
+        runuser -l $USUARIO -c "rm -rf $THEMES/Capriccio"
+    fi
+done < /tmp/homes.list

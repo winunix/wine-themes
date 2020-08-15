@@ -1,0 +1,10 @@
+Package: wine-themes
+Version: 0.0.1
+Installed-Size: 25301
+Maintainer: Crash and Eddie <crash.eddie123@gmail.com>
+Section: utils
+Architecture: all
+Priority: optional
+Depends: wine32 | wine64
+Description: Themes for wine.
+ Some themes for wine.
